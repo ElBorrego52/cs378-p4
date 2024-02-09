@@ -4,5 +4,97 @@
 */
 
 .menu {
-  color: blue;
+  color: black;
+  text-align: left;
+  padding: 0px; 
+  margin-left: 20px;
+  margin-right: 20px;
 }
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px;
+}
+
+body {
+  background-color: rgb(255, 238, 223);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.section {
+  margin: 10px;
+}
+
+.food-name {
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.food-desc {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.price {
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#fancy {
+  font-family: cursive;
+  font-size: 13px;
+  color: orange;
+}
+
+.header {
+  font-size: 25px;
+  color: rgba(0, 0, 0, 0.6);
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+}
+
+#logo {
+  margin: 5vh;
+  margin-top: 1vh;
+  margin-bottom: 4vh;
+}
+
+img {
+  border-radius: 10px;
+}
+
+.menu-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: 1; 
+}
+
+.add-button {
+  background-color: whitesmoke; 
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border: 1px solid black; 
+  border-radius: 20px; 
+  cursor: pointer; 
+  font-size: 12px; 
+  width: 80%;
+  height: 100%;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.add-button:hover {
+  background-color: gray; 
+} 
+
+
