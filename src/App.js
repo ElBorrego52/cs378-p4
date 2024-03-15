@@ -1,99 +1,41 @@
 import './App.css';
-import MenuItem from './components/MenuItem';
-import Header from './components/Header';
+import React, { useState, useEffect } from 'react';
+import InputBox from './components/InputBox';
+import WeatherWidget from './components/WeatherWidget';
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // This imports bootstrap css styles. You can use bootstrap or your own classes by using the className attribute in your elements.
 
-// Menu data. An array of objects where each object represents a menu item. Each menu item has an id, title, description, image name, and price.
-// You can use the image name to get the image from the images folder.
-const menuItems = [
-  {
-    id: 1,
-    title: 'Gyoza',
-    description: 'Japanese dumplings',
-    imageName: 'gyoza.png',
-    price: 5.99,
-  },
-  {
-    id: 2,
-    title: 'Sushi',
-    description: 'Japanese rice rolls',
-    imageName: 'sushi.png',
-    price: 6.99,
-  },
-  {
-    id: 3,
-    title: 'Ramen',
-    description: 'Japanese noodle soup',
-    imageName: 'ramen.png',
-    price: 7.99,
-  },
-  {
-    id: 4,
-    title: 'Matcha Cake',
-    description: 'Japanese green tea cake',
-    imageName: 'matcha-cake.png',
-    price: 4.99,
-  },
-  {
-    id: 5,
-    title: 'Mochi',
-    description: 'Japanese rice cake',
-    imageName: 'mochi.png',
-    price: 3.99,
-  },
-  {
-    id: 6,
-    title: 'Yakitori',
-    description: 'Japanese skewered chicken',
-    imageName: 'yakitori.png',
-    price: 2.99,
-  },
-  {
-    id: 7,
-    title: 'Takoyaki',
-    description: 'Japanese octopus balls',
-    imageName: 'takoyaki.png',
-    price: 5.99,
-  },
-  {
-    id: 8,
-    title: 'Sashimi',
-    description: 'Japanese raw fish',
-    imageName: 'sashimi.png',
-    price: 8.99,
-  },
-  {
-    id: 9,
-    title: 'Okonomiyaki',
-    description: 'Japanese savory pancake',
-    imageName: 'okonomiyaki.png',
-    price: 6.99,
-  },
-  {
-    id: 10,
-    title: 'Katsu Curry',
-    description: 'Japanese curry with fried pork',
-    imageName: 'katsu-curry.png',
-    price: 9.99,
-  }
+// First three cities preloaded on weather app
+const predefinedCities = [
+  { name: "Austin", latitude: 30.26715, longitude: -97.74306 },
+  { name: "Dallas", latitude: 32.78306, longitude: -96.80667 },
+  { name: "Houston", latitude: 29.76328, longitude: -95.36327 },
 ];
 
+function App () {
+  const [cities, setCities] = useState(predefinedCities); // Track citiies already on list
+  const [currentCity, setCurrentCity] = useState(predefinedCities[0]); // Austin as default
 
-function App() {
+  useEffect(() => {
+    // This effect will run once on open and get Austin's weather
+  }, []); 
+
+  // Add city to list of cities if it exists and is not already in the list
+  const handleCitySelected = (city) => {
+    const cityExists = cities.some((c) => c.name.toLowerCase() === city.name.toLowerCase());
+    if (!cityExists) {
+      setCities(cities => [...cities, city]);
+    }
+    setCurrentCity(city);
+  };
+
   return (
-    <div>
-      <div className="header">
-        <Header logoName='os-logo.png' desc1='Delicious, From-Scratch Recipes Close at Hand' desc2='The Fresh Choice of UT!' />
-      </div>
-      <div className="container">
-        {/* Display menu items dynamically here by iterating over the provided menuItems */}
-        {menuItems.map((menuItem) => (
-          <MenuItem key={menuItem.id} title={menuItem.title} description={menuItem.description} price={menuItem.price} imageName={menuItem.imageName} />
-        ))}
-      </div>
+    <div className="app-container">
+      <h1 className="app-header">WEATHER TODAY IN {currentCity.name.toUpperCase()}</h1>
+      <InputBox onCitySelected={handleCitySelected} predefinedCities={cities} />
+      <WeatherWidget latitude={currentCity.latitude} longitude={currentCity.longitude} />
     </div>
   );
-}
+};
 
 export default App;
